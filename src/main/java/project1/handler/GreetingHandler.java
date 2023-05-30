@@ -17,4 +17,11 @@ public class GreetingHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(new Greeting("Hello, Spring!")));
     }
+
+    public Mono<ServerResponse> secret(ServerRequest request) {
+        return ServerResponse
+                .ok()
+                .contentType(MediaType.TEXT_PLAIN)
+                .body(BodyInserters.fromValue("You found me!"));
+    }
 }
