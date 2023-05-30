@@ -18,6 +18,6 @@ public class GreetingRouter {
     public RouterFunction<ServerResponse> route(GreetingHandler greetingHandler) {
 
         return RouterFunctions
-                .route(GET("/hello").and(accept(MediaType.TEXT_PLAIN)), greetingHandler::hello);
+                .route(GET("/hello").and(accept(MediaType.APPLICATION_JSON)), greetingHandler::hello);
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import project1.Greeting;
 import reactor.core.publisher.Mono;
 
 @Component
@@ -14,6 +15,6 @@ public class GreetingHandler {
         return ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(("Hello, Spring!")));
+                .body(BodyInserters.fromValue(new Greeting("Hello, Spring!")));
     }
 }
