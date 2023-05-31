@@ -8,6 +8,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import project1.Greeting;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 @Component
 public class GreetingHandler {
 
@@ -23,5 +25,12 @@ public class GreetingHandler {
                 .ok()
                 .contentType(MediaType.TEXT_PLAIN)
                 .body(BodyInserters.fromValue("You found me!"));
+    }
+
+    public Mono<ServerResponse> index (ServerRequest request) {
+        String user = request.queryParam("user").orElse("Nobody");
+        return ServerResponse
+                .ok()
+                .render("index", Map.of("user", user));
     }
 }
