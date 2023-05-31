@@ -6,6 +6,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import project1.Greeting;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
@@ -20,10 +21,26 @@ public class GreetingHandler {
                 .body(BodyInserters.fromValue(new Greeting("Hello, Spring!")));
     }
 
+    public Mono<ServerResponse> flux(ServerRequest request) {
+        Flux<Greeting> data = Flux
+                .just(
+                        "Hello, reactive!",
+                        "More than one",
+                        "Third post",
+                        "Fourth post",
+                        "Fifth post"
+                ).map(Greeting::new);
+
+        return ServerResponse
+                .ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(data, Greeting.class);
+    }
+
     public Mono<ServerResponse> secret(ServerRequest request) {
         return ServerResponse
                 .ok()
-                .contentType(MediaType.TEXT_PLAIN)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue("You found me!"));
     }
 

@@ -16,7 +16,8 @@ public class GreetingRouter {
     public RouterFunction<ServerResponse> route(GreetingHandler greetingHandler) {
         return RouterFunctions
                 .route(GET("/secret").and(accept(MediaType.APPLICATION_JSON)), greetingHandler::secret)
-                .andRoute(GET("/"), greetingHandler::index);
+                .andRoute(GET("/"), greetingHandler::index)
+                .andRoute(GET("/hello"), greetingHandler::flux);
 
     }
 
